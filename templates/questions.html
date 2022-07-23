@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<style>
+ body  {
+    background-color: #EEADDE;
+ }
+</style>
+<div class="container" >
+<h3 style="text-align:left">Sorular</h3>
+<hr>
+<a href = "{% url 'askquestion' %}" class = "btn btn-danger float-right">Soru Sor</a>
+
+<form>
+    {% csrf_token %}
+    <input type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Ara...">
+    <button type="submit" class="btn btn-danger">Ara</button>
+</form>
+<hr>
+{% if questions %}
+
+        <table class="table table-hover" style="background-color: #F5F0F0; ">
+            <thead>
+            <tr>
+                <th scope="col">Soru</th>
+                <th scope="col">Kullanıcı</th>
+                <th scope="col">Oluşturulma Tarihi</th>
+                <th scope="col">Sil</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for question in questions %}
+                
+                    <tr>
+                        <td ><a href = "/question_detail/{{question.id}}">{{question.title}}</a></td>
+                        <td >{{question.author}}</td>
+                        <td >{{question.created_date}}</td>
+                        <td ><a href = "{% url 'question_delete' question.id %}" type="button" class="btn btn-danger">Sil</a></td>
+                    </tr>
+
+                {% endfor %}    
+            </tbody>
+        </table>
+
+    {% else %}
+        <div class = "alert alert-danger">Soru bulunamadı.</div>
+    {% endif %}
+
+
+{% endblock body %}

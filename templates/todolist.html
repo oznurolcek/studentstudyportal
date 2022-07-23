@@ -1,0 +1,107 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<style>
+body{
+    background-color: #C39BD3;
+}
+</style>
+
+
+<div class="container" style="margin-bottom:120px; background-color:$indigo-500">
+    <h3>Yapılacaklar Listesi</h3>
+    <hr>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        
+        <button type = "submit" class = "btn btn-danger">Görev Ekle</button>
+    </form>
+    
+    <hr>
+    <br>
+
+    {% if notFinishedNumber > 0%}
+    <table class="table table-striped table-bordered table-hover" style="background-color: #F5F0F0; " >
+    <caption style="color:#2B2B2B">Yapılacaklar Listesi</caption>
+    <thead class="table-dark">
+        <tr >
+        <th scope="col" style="width:5%">Id</th>
+        <th scope="col" style="width:5%"></th>
+        <th scope="col" style="width:87%">Yapılacaklar</th>
+        <th scope="col" style="width:3%">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for todo in todos %}
+            {% if todo.is_finished == False %}
+            <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td style="margin-left:50px">
+            <a href="{% url 'update-todo' todo.id %}">
+                <div class="form-check container-fluid" style="margin-left:28px">
+                {% if todo.is_finished == True %}
+                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault"  checked>
+                {% else %}
+                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
+                {% endif %}
+                </div>
+            </a>
+            </td>
+            <td>{{todo.title}}</td>
+            <td><a href="{% url 'delete-todo' todo.id %}"><i class="fa fa-trash icon-cog" style="color:rgb(203,11,11)" ></i></a></td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+    <div class = "alert alert-danger">Görevler listeniz boş.</div>
+    {% endif %}
+
+    
+    <hr>
+    <br>
+
+    {% if finishedNumber > 0 %}
+    <table class="table table-striped table-bordered table-hover " style="background-color: #F5F0F0; ">
+    <caption style="color:#2B2B2B">Tamamlananlar Listesi</caption>
+    <thead>
+        <tr>
+        <th scope="col" style="width:5%">Id</th>
+        <th scope="col" style="width:5%"></th>
+        <th scope="col" style="width:87%">Tamamlananlar</th>
+        <th scope="col" style="width:3%">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for todo in todos %}
+            {% if todo.is_finished == True %}
+            <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td style="margin-left:50px">
+            <a href="{% url 'update-todo' todo.id %}">
+                <div class="form-check container-fluid" style="margin-left:28px; margin-top:4px; margin-bottom:4px">
+                {% if todo.is_finished == True %}
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                {% else %}
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                {% endif %}
+                </div>
+            </a>
+            </td>
+            <td><s>{{todo.title}}</s></td>
+            <td><a href="{% url 'delete-todo' todo.id %}"><i class="fa fa-trash icon-cog" style="color:rgb(203,11,11)" ></i></a></td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+    <div class = "alert alert-danger">Tamamlanan listeniz boş.</div>
+    {% endif %}
+    
+
+</div>
+{% endblock body %}

@@ -1,0 +1,126 @@
+{% extends "layout.html" %}
+
+{% load static %}
+{% block body %}
+<style>
+body{
+    background-color: #DECDE7;
+}
+</style>
+
+<div class="row justify-content-md-center">
+
+    <div class="card col-2 ">
+        <br>
+            <img class="card-img-top" src="{% static 'images/takingnotes1.jpg' %}" alt="Notes image" >
+        <br>
+        <div class="card-body ">
+        <a class="nav-link" href="{% url 'note:mynotes' %}">
+            <h5 class="card-title">Notlar</h5>
+            <p class="card-text">Ders çalışırken aldığınız notları saklayabilirsiniz.</p>
+            <br>
+        </a>
+        </div>
+    </div>
+
+    <div class="card col-2">
+        <br>
+        <img class="card-img-top" src="{% static 'images/homeworks.jpg' %}" alt="Notes image">
+        <br>
+        <div class="card-body">
+            <a class="nav-link" href="{% url 'homeworks' %}">
+                <h5 class="card-title">Ödevler</h5>
+                <p class="card-text">Ödev takibini daha kolay yapmak için ödevlerinizi ve teslim tarihlerinizi listeye ekleyebilirsiniz.</p>
+                <br>
+            </a>
+        </div>
+    </div>
+
+    <div class="card col-2">
+        <br>
+        <img class="card-img-top" src="{% static 'images/examnotes.jpg' %}" alt="Notes image">
+        <br>
+        <div class="card-body">
+            <a class="nav-link" href="{% url 'exammarks' %}">
+                <h5 class="card-title">Sınav Notları</h5>
+                <p class="card-text">Sınavlardan aldığınız notları ekleyebilir ve dersi başarıyla geçmek için diğer sınavlardan kaç almanız gerektiğini hesaplayabilirsiniz.</p>
+                <br>
+            </a>
+        </div>
+    </div>
+
+    <div class="card col-2">
+        <br>
+        <img class="card-img-top" src="{% static 'images/calendar.jpg' %}" alt="Notes image">
+        <br>
+        <div class="card-body">
+            <a class="nav-link" href="{% url 'examcalendar' %}">
+                <h5 class="card-title">Sınav Takvimi</h5>
+                <p class="card-text">Sınav takibini daha kolay yapmak için program oluşturabilirsiniz.</p>
+                <br>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<div class="row justify-content-md-center" style="margin-bottom:100px">
+
+    <div class="card col-2">
+        <br>
+        <img class="card-img-top" src="{% static 'images/todoo.jpg' %}" alt="Notes image">
+        <br>
+        <div class="card-body">
+            <a class="nav-link" href="{% url 'todolist' %}">
+                <h5 class="card-title">Yapılacaklar Listesi</h5>
+                <p class="card-text">Günlük, haftalık yapmayı planladığınız işlerin takibini kolaylaştırmak için maddelerinizi yapılacaklar listesine ekleyebilirsiniz.</p>
+                <br>
+            </a>
+        </div>
+    </div>
+
+    <div class="card col-2">
+        <br>
+        <img class="card-img-top" src="{% static 'images/timer.jpg' %}" alt="Notes image">
+        <br>
+        <div class="card-body">
+            <a class="nav-link" href="{% url 'timer' %}">
+                <h5 class="card-title">Kronometre</h5>
+                <p class="card-text">Süre tutarak ders çalışırsanız odağınızı arttırabilirsiniz.</p>
+                <br>
+            </a>
+        </div>
+    </div>
+
+    <div class="card col-2">
+        <br>
+        <img class="card-img-top" src="{% static 'images/questions.jpg' %}" alt="Notes image">
+        <br>
+        <div class="card-body">
+            <a class="nav-link" href="{% url 'questions' %}">
+                <h5 class="card-title">Soru - Cevap</h5>
+                <p class="card-text">Merak ettiklerinizi sorup cevaplarını bulabilirsiniz.</p>
+                <br>
+            </a>
+        </div>
+    </div>
+
+    <div class="card col-2">
+        <br>
+        <img class="card-img-top" src="{% static 'images/music.jpg' %}" alt="Notes image">
+        <br>
+        <div class="card-body">
+            <a class="nav-link" href="{% url 'music' %}">
+                <h5 class="card-title">Ders Çalışma Müziği</h5>
+                <p class="card-text">Ders çalışırken konsantrasyonunuzu arttıracak çalma listesini dinleyebilirsiniz.</p>
+                <br>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+{% endblock body %}

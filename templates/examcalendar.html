@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<style>
+body{
+    background-color: #F9E79F;
+}
+</style>
+
+
+<div class="container" style="margin-bottom:120px">
+    <h3>Sınav Takvimi</h3>
+    <hr>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        <button type = "submit" class = "btn btn-danger">Sınav Ekle</button>
+    </form>
+    <hr>
+    <br>
+
+    {% if notFinishedNumber > 0%}
+        <h4>Sınavlar</h4>
+        <div class="row">
+        <div class="card-columns">
+        {% for examdate in examdates %}
+            {% if examdate.is_finished == False %}
+                    <div class="card h-80 w-60 text-center" style="margin:15px">
+                    <div class="card-body">
+                        <br>
+                        <h5 class="card-title">{{examdate.subject}}</h5>
+                        <p class="card-text">{{examdate.examDate}}<br>{{examdate.examTime}}</p>                        
+                        <br>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'update-examcalendar' examdate.id %}">
+                        <button type = "submit" class = "btn btn-danger">Tamamlandı</button>
+                        </a>
+                        <a href="{% url 'delete-examcalendar' examdate.id %}">
+                        <button type = "submit" class = "btn btn-danger">Sil</button>
+                        </a>
+                    </div>
+                    </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+        </div>
+    {% else %}
+    <div class = "alert alert-danger">Sınavınız bulunmuyor.</div>
+    {% endif %}
+
+    <hr>
+    <br>
+
+    {% if finishedNumber > 0 %}
+        <h4>Tamamlanan Sınavlar</h4>
+        <div class="row">
+        <div class="card-columns">
+        {% for examdate in examdates %}
+            {% if examdate.is_finished == True %}
+                    <div class="card h-80 w-60 text-center" style="margin:15px">
+                    <div class="card-body">
+                        <br>
+                        <h5 class="card-title"><s>{{examdate.subject}}</s></h5>
+                        <p class="card-text"><s>{{examdate.examDate}}<br>{{examdate.examTime}}</s></p>                        
+                        <br>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'update-examcalendar' examdate.id %}">
+                        <button type = "submit" class = "btn btn-danger">Tamamlandı</button>
+                        </a>
+                        <a href="{% url 'delete-examcalendar' examdate.id %}">
+                        <button type = "submit" class = "btn btn-danger">Sil</button>
+                        </a>
+                    </div>
+                    </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+        </div>
+    {% else %}
+    <div class = "alert alert-danger">Tamamlanmış sınavınız bulunmuyor.</div>
+    {% endif %}
+</div>
+
+
+{% endblock body %}

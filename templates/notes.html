@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<style>
+ body  {
+    background-color: #AED6F1;
+ }
+</style>
+
+<div class="row">
+    <div class="col-md-7 offset-md-3">
+        <br><br><br><br>
+        <h3 style="text-align:left">Notlarım<h3>
+        <hr>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-7 offset-md-3">
+        <form>
+            {% csrf_token %}
+            <a href = "/notes/mynotes" class = "btn btn-danger ">Notlar Listesi</a>
+        
+            <input type="text" name = "keyword" class="input-sm float-right" style="margin-top:8px" maxlength="64" placeholder="Ara...">
+            <button type="submit" class="btn btn-danger float-right " style="margin:5px">Ara</button>
+            <hr>
+        </form>
+    </div>
+</div>
+
+{% if notes %}
+
+{% for note in notes %}
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <div class="card">
+            <div class="card-header">
+                <a href = "{% url 'note:detail' note.id %}"><h3 class="fw-bolder mb-1">{{note.title}}</h3></a>
+            </div>
+            <div class="card-body" style="margin-left:18px">
+            <br>
+                {% if note.note_image %}
+                <a href="{{note.note_image.url}}" target="_blank">
+                  <img src="{{note.note_image.url}}" alt="Lights" style="width:10%">
+                </a>
+                {% endif %}
+                <p class="card-text">{{note.content|safe}}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Oluşturulma Tarihi: {{note.created_date}}</small>
+                </div>
+            </div>
+
+
+
+
+{% comment %}             <article>
+                <header class="mb-4 ">
+                    <br><br><br><br>
+                    <a href = "{% url 'note:detail' note.id %}"><h3 class="fw-bolder mb-1">{{note.title}}</h3></a>
+                    <hr>
+                    <div class="text-muted fst-italic mb-10">Oluşturulma Tarihi:</div>
+                    <div>{{note.created_date}}</div>
+                    <hr>
+                </header>
+                {% if note.note_image %}
+                <div class="thumbnail">
+                    <a href="{{note.note_image.url}}" target="_blank">
+                    <img src="{{note.note_image.url}}" alt="Lights" style="width:10%">
+                    </a>
+                </div>
+                {% endif %}
+                <section class="mb-5">
+                    <p class="fs-5 mb-4">{{note.content|safe}}</p>
+                </section>
+            </article> {% endcomment %}
+            <hr>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+
+{% else %}
+<div class="row">
+    <div class="col-md-7 offset-md-3">
+        <div class = "alert alert-danger">
+            Not bulunamadı.
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endblock body %}

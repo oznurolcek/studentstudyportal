@@ -1,0 +1,112 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+<style>
+body{
+    background-color: coral;
+}
+</style>
+<div class="container" style="margin-bottom:120px">
+    <h3>Ödevler</h3>
+    <hr>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form|crispy}}
+        
+        <button type = "submit" class = "btn btn-danger">Ödev Ekle</button>
+    </form>
+    
+    <hr>
+    <br>
+
+    {% if notFinishedNumber > 0%}
+    <table class="table table-striped table-hover table-bordered" style="background-color: #F5F0F0; ">
+    <caption style="color:#2B2B2B">Ödevler</caption>
+    <thead class="table-dark">
+        <tr >
+        <th scope="col" style="width:5%">Id</th>
+        <th scope="col" style="width:17%">Ders</th>
+        <th scope="col" style="width:50%">İçerik</th>
+        <th scope="col" style="width:20%">Son Tarih</th>
+        <th scope="col" style="width:5%"></th>
+        <th scope="col" style="width:3%">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for homework in homeworks %}
+            {% if homework.is_finished == False %}
+            <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{homework.subject}}</td>
+            <td>{{homework.description}}</td>
+            <td>{{homework.due}}</td>
+            <td style="margin-left:50px">
+            <a href="{% url 'update-homeworks' homework.id %}">
+                <div class="form-check container-fluid" style="margin-left:28px">
+                {% if homework.is_finished == True %}
+                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault"  checked>
+                {% else %}
+                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
+                {% endif %}
+                </div>
+            </a>
+            </td>
+            <td><a href="{% url 'delete-homeworks' homework.id %}"><i class="fa fa-trash icon-cog" style="color:rgb(203,11,11)" ></i></a></td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+    <div class = "alert alert-danger">Ödeviniz bulunmuyor.</div>
+    {% endif %}
+
+    <hr>
+    <br>
+
+    {% if finishedNumber > 0 %}
+    <table class="table table-striped table-bordered table-hover" style="background-color: #F5F0F0;">
+    <caption style="color:#2B2B2B">Tamamlanan Ödevler</caption>
+    <thead class="table-dark">
+        <tr >
+        <th scope="col" style="width:5%">Id</th>
+        <th scope="col" style="width:17%">Ders</th>
+        <th scope="col" style="width:50%">İçerik</th>
+        <th scope="col" style="width:20%">Son Tarih</th>
+        <th scope="col" style="width:5%"></th>
+        <th scope="col" style="width:3%">Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for homework in homeworks %}
+            {% if homework.is_finished == True %}
+            <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td><s>{{homework.subject}}</s></td>
+            <td><s>{{homework.description}}</s></td>
+            <td><s>{{homework.due}}</s></td>
+            <td style="margin-left:50px">
+            <a href="{% url 'update-homeworks' homework.id %}">
+                <div class="form-check container-fluid" style="margin-left:28px">
+                {% if homework.is_finished == True %}
+                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault"  checked>
+                {% else %}
+                <input class="form-check-input " type="checkbox" value="" id="flexCheckDefault">
+                {% endif %}
+                </div>
+            </a>
+            </td>
+            <td><a href="{% url 'delete-homeworks' homework.id %}"><i class="fa fa-trash icon-cog" style="color:rgb(203,11,11)" ></i></a></td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </tbody>
+    </table>
+    {% else %}
+    <div class = "alert alert-danger">Tamamlanan ödeviniz bulunmuyor.</div>
+    {% endif %}
+
+</div>
+{% endblock body %}

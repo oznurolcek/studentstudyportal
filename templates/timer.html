@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<style>
+ body  {
+    background-color: #9A65B8;
+ }
+</style>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>KRONOMETRE</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;1,300&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⏳</text></svg>"
+    />
+  </head>
+
+  <body>
+    <div class="stopwatch">
+    <br><br><br><br>
+      <h1><span class="gold">KRONOMETRE</h1>
+      <div class="circle" style="border:3x white">
+        <span class="time" id="display">00:00:00</span>
+      </div>
+
+      <div class="controls">
+        <button class="buttonPlay">
+          <i id="playButton" class="fas fa-play-circle" style="font-size:64px; color:rgb(242,201,76)"></i>
+
+          <i id="pauseButton" class="fas fa-pause-circle" style="font-size:64px; color:rgb(242,201,76)"></i>
+         
+        </button>
+
+        <button class="buttonReset">
+          <i id="resetButton" class="fas fa-stop-circle" style="font-size:64px; color:rgb(242,201,76)"></i>
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
+
+
+{% endblock body %}

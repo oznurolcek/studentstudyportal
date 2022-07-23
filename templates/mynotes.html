@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<style>
+ body  {
+    background-color: #AED6F1;
+ }
+</style>
+
+<div class="container" >
+<br><br><br><br>
+<h3 style="text-align:left">Notlarım</h3>
+
+<hr>
+
+{% if request.user.is_authenticated %}
+    <a href = "/notes/addnote" class = "btn btn-danger">Not Ekle</a>
+    <a href = "/notes" class = "btn btn-danger">Detaylarıyla Notlar</a>
+    <br><br>
+
+    {% if notes %}
+
+        <table class="table table-hover table-striped table-bordered" style="background-color: #F5F0F0; ">
+            <thead>
+            <tr>
+                <th scope="col">Not</th>
+                <th scope="col">Oluşturulma Tarihi</th>
+                <th scope="col">Güncelle</th>
+                <th scope="col">Sil</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for note in notes %}
+                
+                    <tr>
+                        <td><a href = "{% url 'note:detail' note.id %}">{{note.title}}</a></td>
+                        <td >{{note.created_date}}</td>
+                        <td ><a href = "{% url 'note:update' note.id %}" type="button" class="btn btn-danger">Güncelle</a></td>
+                        <td ><a href = "{% url 'note:delete' note.id %}" type="button" class="btn btn-danger">Sil</a></td>
+
+                    </tr>
+
+                {% endfor %}    
+            </tbody>
+        </table>
+
+    {% else %}
+        <div class = "alert alert-danger">Henüz makaleniz bulunmuyor.</div>
+    {% endif %}
+
+{% else %}
+    <div class="alert alert-warning" role="alert">
+        Not ekleyebilmek için kullanıcı girişi yapınız.
+    </div>
+{% endif %}
+</div>
+{% endblock body %}

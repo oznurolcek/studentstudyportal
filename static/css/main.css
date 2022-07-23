@@ -1,0 +1,41 @@
+.card {
+  min-width: 0;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.25rem;
+    /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  margin: 40px 40px 0 40px;
+}
+
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
+    padding-left: 20px;
+}
+
+body {
+    /*background: linear-gradient(to bottom, #33ccff 0%, #ff99cc 100%)*/
+    overflow-x: hidden;
+    background-repeat: no-repeat;
+}
+
+.card-img-top:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+  transition: 0.2s ease;
+
+}
+
+

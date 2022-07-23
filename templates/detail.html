@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<style>
+ body  {
+    background-color: #AED6F1;
+ }
+</style>
+<div class="row">
+    <div class="container">
+            <div class="card">
+            <div class="card-header">
+                <a href = "{% url 'note:detail' note.id %}"><h3 class="fw-bolder mb-1">{{note.title}}</h3></a>
+            </div>
+            <div class="card-body" style="margin-left:18px">
+            <br>
+                {% if note.note_image %}
+                <a href="{{note.note_image.url}}" target="_blank">
+                  <img src="{{note.note_image.url}}" alt="Lights" style="width:10%">
+                </a>
+                {% endif %}
+                <p class="card-text">{{note.content|safe}}</p>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted">Oluşturulma Tarihi: {{note.created_date}}</small>
+                </div>
+            </div>
+        <br>
+        <a href = "{% url 'note:update' note.id %}" type="button" class="btn btn-danger" style="margin-left:40px">Güncelle</a>
+        <a href = "{% url 'note:delete' note.id %}" type="button" class="btn btn-danger">Sil</a>
+        <a href = "{% url 'note:mynotes' %}" type="button" class="btn btn-danger float-right" style="margin-right:40px">Geri Dön</a>
+
+
+{% comment %}         <article>
+            <header class="mb-4">
+                <br><br><br><br>
+                <h3 class="fw-bolder mb-1">{{note.title}}</h3>
+                <hr>
+                <div class="text-muted fst-italic mb-10">Oluşturulma Tarihi:</div>
+                <div>{{note.created_date}}</div>
+                <hr>
+            </header>
+            {% if note.note_image %}
+            <div class="thumbnail">
+                <a href="{{note.note_image.url}}" target="_blank">
+                  <img src="{{note.note_image.url}}" alt="Lights" style="width:10%">
+                </a>
+            {% endif %}
+            <section class="mb-5">
+                <p class="fs-5 mb-4">{{note.content|safe}}</p>
+            </section>
+        </article> {% endcomment %}
+    </div>
+</div>
+
+<div class="text-right">
+    
+</div>
+</div>
+
+{% endblock body %}
